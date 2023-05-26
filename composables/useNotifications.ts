@@ -1,5 +1,4 @@
 import {createUUID} from "~/utils";
-import {onMounted} from "#build/imports";
 
 const defaultNotificationOptions = {
     type: "info",
@@ -7,15 +6,11 @@ const defaultNotificationOptions = {
     message:
         "Ooops! A message was not provided.",
     autoClose: true,
-    duration: 5,
+    duration: 3,
 };
 
 export const useNotifications = () => {
     const notifications = useState<INotification[]>('notifications', () => [])
-
-    onMounted(() => {
-
-    })
 
     const showNotification = (options?: {
         type?: NotificationType,
@@ -33,6 +28,12 @@ export const useNotifications = () => {
             ..._options
         }
         notifications.value = [...notifications.value, newNotify]
+
+        if (!newNotify.autoClose) return;
+
+        setTimeout(() => {
+            notifications.value = notifications.value.filter((n) => n.id !== newNotify.id)
+        }, newNotify.duration * 1000)
     }
 
     const removeNotification = (id: string) => {
