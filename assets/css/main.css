@@ -1,3 +1,32 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+#notify {
+    @apply fixed left-1/2 text-white -translate-x-1/2 top-[20px] rounded overflow-hidden px-2 py-3 w-full max-w-[350px] shadow-lg items-center flex gap-1 justify-center;
+}
+
+#notify::after {
+    content: "";
+    position: absolute;
+    width: 5px;
+    left: 0;
+    height: 100%;
+}
+
+#notify::after.info,
+.info {
+    @apply bg-blue-500;
+}
+#notify::after.success,
+.success {
+    @apply bg-green-500;
+}
+#notify::after.error,
+.error {
+    @apply bg-red-500;
+}
+#notify::after.warning,
+.warning {
+    @apply bg-amber-500;
+}

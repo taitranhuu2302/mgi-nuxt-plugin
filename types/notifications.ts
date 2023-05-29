@@ -10,7 +10,5 @@ export interface INotification {
   type: NotificationType;
   title: string;
   message: string;
-  isAutoClose: boolean;
-  duration: number;
 }
 
