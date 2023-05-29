@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { INotification, NotificationType } from "@/types/notifications";
+
 const props = defineProps<{
   notify: INotification;
 }>();
@@ -6,7 +8,7 @@ const { removeNotification } = useNotifications();
 </script>
 
 <template>
-  <div id="root" :class="props.notify.type">
+  <div id="root" :class="NotificationType[props.notify.type]">
     <button
       @click="removeNotification(props.notify.id)"
       class="absolute top-[5px] right-[5px]"
@@ -14,7 +16,7 @@ const { removeNotification } = useNotifications();
       <Icon name="ic:outline-close" size="20" />
     </button>
     <div class="px-5 w-full py-3 flex gap-3 items-center">
-      <div class="wrapper-icon" :class="props.notify.type">
+      <div class="wrapper-icon" :class="NotificationType[props.notify.type]">
         <Icon name="ic:round-check" size="20px" />
       </div>
       <div>
@@ -37,36 +39,24 @@ const { removeNotification } = useNotifications();
   height: 100%;
 }
 
-#root::after.info {
+#root::after.info,
+.info {
   @apply bg-blue-500;
 }
-#root::after.success {
+#root::after.success,
+.success {
   @apply bg-green-500;
 }
-#root::after.error {
+#root::after.error,
+.error {
   @apply bg-red-500;
 }
-#root::after.warning {
+#root::after.warning,
+.warning {
   @apply bg-amber-500;
 }
 
 .wrapper-icon {
   @apply rounded-full w-[30px] h-[30px] text-white flex items-center justify-center;
-}
-
-.info {
-  @apply bg-blue-500;
-}
-
-.success {
-  @apply bg-green-500;
-}
-
-.error {
-  @apply bg-red-500;
-}
-
-.warning {
-  @apply bg-amber-500;
 }
 </style>
