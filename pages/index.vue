@@ -6,25 +6,29 @@ const onShowNotify = (type: NotificationType) => {
     case "info":
       $showNotification({
         message: 'New settings available on your account',
-        type
+        type,
+        title: "Info Notification"
       })
       break;
     case "success":
       $showNotification({
         message: 'Your changes are saved successfully',
-        type
+        type,
+        title: "Success Notification"
       })
       break;
     case "error":
       $showNotification({
         message: 'Error has occurred saving changes',
-        type
+        type,
+        title: "Error Notification"
       })
       break;
     case "warning":
       $showNotification({
         message: 'Username you have entered is invalid',
-        type
+        type,
+        title: "Warning Notification"
       })
       break;
   }
